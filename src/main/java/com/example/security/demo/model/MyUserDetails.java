@@ -14,22 +14,31 @@ public class MyUserDetails implements UserDetails {
 
         private String userName;
         private String password;
-        private boolean active;
+        private boolean isActive;
         private List<GrantedAuthority> authorities;
+
 
         public MyUserDetails(User user) {
             this.userName = user.getUserName();
             this.password = user.getPassword();
-            this.active = user.isActive();
-            this.authorities = Arrays.stream(user.getRoles().split(","))                    .map(SimpleGrantedAuthority::new)                    .collect(Collectors.toList());
+            this.isActive = user.isActive();
+            this.authorities = Arrays.stream(user.getRoles().split(","))
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
            // this.authorities = Arrays.(user.getRoles();
+
 
         }
 
+    public MyUserDetails(Optional<User> user) {
+
+    }
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+     //   System.out.println(authorities);
         return authorities;
     }
 
@@ -40,6 +49,8 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+      //  System.out.println(userName);
+
         return userName;
     }
 
@@ -60,7 +71,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return isActive;
     }
 
 }

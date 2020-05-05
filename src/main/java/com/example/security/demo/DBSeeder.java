@@ -27,16 +27,16 @@ public class DBSeeder implements CommandLineRunner {
         user1.setActive(true);
         user1.setPassword("pass");
         user1.setUserName("admin");
-        user1.setRoles("ADMIN");
+        user1.setRoles("ROLE_ADMIN");
 
         User user2 = new User();
         user2.setActive(true);
         user2.setPassword("pass");
         user2.setUserName("user");
-        user2.setRoles("USER");
+        user2.setRoles("ROLE_USER,ROLE_ADMIN");
 
 
-        List<User> camps = Arrays.asList(user2, user1);
+        List<User> camps = Arrays.asList(user1, user2);
         this.userRepository.saveAll(camps);
     }
 }
